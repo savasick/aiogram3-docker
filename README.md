@@ -16,7 +16,7 @@ insert token from <a href="https://telegram.me/BotFather">BotFather</a> to env f
 change .env file, also change create_fixtures.db with credentials
 
 
-### usage
+### start
 ```bash
 docker-compose up -d
 ```
