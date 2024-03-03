@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+
+  bot:
+    build: .
+    restart: always
+    env_file: .env
+    depends_on:
+      - db
+
+  db:
+    build: 
+      context: ./db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=${BOT_DATABASE_USER}
+      - POSTGRES_PASSWORD=${BOT_DATABASE_PASSWORD}
+      - POSTGRES_DB=${BOT_DATABASE_NAME}
+      - POSTGRES_HOST=${BOT_DATABASE_HOST}
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8070:8080
+    environment: 
+      - ADMINER_DEFAULT_SERVER=db
+      - ADMINER_DESIGN=nette
+    depends_on:
+      - db
